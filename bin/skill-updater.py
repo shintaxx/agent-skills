@@ -50,16 +50,18 @@ def main():
         shutil.copytree(source_path, target_path)
         print(f"コピー完了: {SOURCE_DIR} -> {TARGET_DIR}/{skill_name}")
 
-        # SKILL.md のプレイスホルダーを置換
+        # template.md を SKILL.md にリネームしてプレイスホルダーを置換
+        template_path = target_path / "template.md"
         skill_md_path = target_path / "SKILL.md"
-        if skill_md_path.exists():
-            content = skill_md_path.read_text(encoding="utf-8")
+        if template_path.exists():
+            content = template_path.read_text(encoding="utf-8")
             updated_content = content.replace(PLACEHOLDER_INSTALL_PATH, install_path)
             updated_content = updated_content.replace(PLACEHOLDER_SKILL_NAME, skill_name)
             skill_md_path.write_text(updated_content, encoding="utf-8")
-            print(f"  -> SKILL.md 更新: プレースホルダーを置換 (name={skill_name}, path={install_path})")
+            template_path.unlink()  # template.md を削除
+            print(f"  -> SKILL.md 作成: プレースホルダーを置換 (name={skill_name}, path={install_path})")
         else:
-            print(f"  -> 警告: SKILL.md が見つかりません: {skill_md_path}")
+            print(f"  -> 警告: template.md が見つかりません: {template_path}")
 
     print("\n全てのスキルの更新が完了しました")
     return 0
