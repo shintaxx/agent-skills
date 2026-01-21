@@ -2,7 +2,7 @@
 """
 skill-updater.py
 
-master-skill ディレクトリを各ターゲットスキルにコピーし、
+master ディレクトリを各ターゲットスキルにコピーし、
 SKILL.md 内のプレイスホルダーを適切な設置パスに置換する。
 """
 
@@ -21,7 +21,7 @@ PLACEHOLDER_INSTALL_PATH = "{{SKILL_INSTALL_PATH}}"
 PLACEHOLDER_SKILL_NAME = "{{SKILL_NAME}}"
 
 # ディレクトリ名
-SOURCE_DIR = "master-skill"
+SOURCE_DIR = "master"
 TARGET_DIR = "skills"
 
 
@@ -31,7 +31,7 @@ def main():
     source_path = base_path / SOURCE_DIR
     skills_path = base_path / TARGET_DIR
 
-    # master-skill ディレクトリの存在確認
+    # master ディレクトリの存在確認
     if not source_path.exists():
         print(f"エラー: {SOURCE_DIR} ディレクトリが見つかりません")
         return 1
